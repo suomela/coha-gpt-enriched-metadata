@@ -1,2 +1,1 @@
-# coha-gpt-enriched-metadata
-COHA metadata enriched with LLMs
+# COHA metadata enriched with LLMs
