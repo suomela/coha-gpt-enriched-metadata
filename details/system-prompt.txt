@@ -1,0 +1,415 @@
+We have got JSON records that describe well-known novels, with fields "author", "title", and "year".
+This information may be somewhat unreliable; for example, "year" is not necessarily the year when the novel was first published.
+Sometimes the "author" field might contain the year of birth and the year of death of the author, or some other useful identifying information.
+There may also be some entries that describe books that are not novels.
+For each record we need to find this information:
+
+- year = the correct year when the book was first published
+- author_gender = the gender of the author
+- author_year_of_birth = the author's year of birth
+- genre = the genre of the book
+- target_audience = the age of the target audience
+
+Set "genre" = "not a novel" if the book is not a novel (e.g. a collection of short stories or poetry).
+Leave those fields empty that cannot be reliably determined, or if they are ambiguous (e.g. multiple authors with mixed genders).
+
+
+Here are some examples of valid input records and corresponding output records:
+
+Input:
+{"author": "Andrews, V. C.  (Virginia C.)", "title": "Dawn /", "year": 1990}
+
+Output:
+{"year":1990,"author_gender":"female","author_year_of_birth":1923,"genre":"Horror","target_audience":"young adult"}
+
+---
+
+Input:
+{"author": "James T. Farrell", "title": "Yet Other Waters", "year": 1952}
+
+Output:
+{"year":1952,"author_gender":"male","author_year_of_birth":1904,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Taylor Caldwell", "title": "Wide House", "year": 1945}
+
+Output:
+{"year":1945,"author_gender":"female","author_year_of_birth":1900,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Calvert, George Henry, 1803-1889", "title": "The Maid of Orleans", "year": 1861}
+
+Output:
+{"year":1874,"author_gender":"male","author_year_of_birth":1803,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Frederic, Harold, 1856-1898", "title": "The Damnation of Theron Ware", "year": 1896}
+
+Output:
+{"year":1896,"author_gender":"male","author_year_of_birth":1856,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Paul Horgan", "title": "Things as They Are", "year": 1964}
+
+Output:
+{"year":1964,"author_gender":"male","author_year_of_birth":1903,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Ernest Hemingway", "title": "Across the River and Into the Trees", "year": 1950}
+
+Output:
+{"year":1950,"author_gender":"male","author_year_of_birth":1899,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Richard G. Stern", "title": "Stitch", "year": 1965}
+
+Output:
+{"year":1965,"author_gender":"male","author_year_of_birth":1928,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "James M. Cain", "title": "Mignon", "year": 1962}
+
+Output:
+{"year":1962,"author_gender":"male","author_year_of_birth":1892,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Pyle, Katharine, 1863-1938", "title": "The Counterpane Fairy", "year": 1898}
+
+Output:
+{"year":1898,"author_gender":"female","author_year_of_birth":1863,"genre":"not a novel","target_audience":"children"}
+
+---
+
+Input:
+{"author": "Dalrymple, Leona, 1884-", "title": "Diane of the Green Van", "year": 1914}
+
+Output:
+{"year":1914,"author_gender":"female","author_year_of_birth":1844,"genre":"Romance","target_audience":"young adult"}
+
+---
+
+Input:
+{"author": "Manly, John Matthews, 1865-1940", "title": "Contemporary American Literature Bibliographies and Study Outlines", "year": 1922}
+
+Output:
+{"year":1922,"author_gender":null,"author_year_of_birth":null,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "William Styron", "title": "Confessions of Nat Turner", "year": 1967}
+
+Output:
+{"year":1967,"author_gender":"male","author_year_of_birth":1925,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Jean Stafford", "title": "Catherine Wheel", "year": 1952}
+
+Output:
+{"year":1952,"author_gender":"female","author_year_of_birth":1915,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Taylor Caldwell", "title": "Final Hour", "year": 1944}
+
+Output:
+{"year":1944,"author_gender":"female","author_year_of_birth":1900,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Deavid Eddings", "title": "Guardians of the West", "year": 1987}
+
+Output:
+{"year":1987,"author_gender":"male","author_year_of_birth":1931,"genre":"Fantasy","target_audience":"young adult"}
+
+---
+
+Input:
+{"author": "Ann Patchett", "title": "The Patron Saint of Liars", "year": 1993}
+
+Output:
+{"year":1992,"author_gender":"female","author_year_of_birth":1963,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Various", "title": "The Nest in the Honeysuckles, and other Stories", "year": 1855}
+
+Output:
+{"year":1855,"author_gender":null,"author_year_of_birth":null,"genre":"not a novel","target_audience":"children"}
+
+---
+
+Input:
+{"author": "Robb, J. D., 1950- ", "title": "Naked in death /", "year": 1995}
+
+Output:
+{"year":1995,"author_gender":"female","author_year_of_birth":1950,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "McHenry, James, 1785-1845", "title": "Meredith; or, The Mystery of the Meschianza. A Tale of the American Revolution", "year": 1831}
+
+Output:
+{"year":1831,"author_gender":"male","author_year_of_birth":1785,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Fitzhugh, Percy Keese, 1876-1950", "title": "Pee-Wee Harris on the Trail", "year": 1922}
+
+Output:
+{"year":1922,"author_gender":"male","author_year_of_birth":1876,"genre":"Adventure and Western","target_audience":"children"}
+
+---
+
+Input:
+{"author": "Kenneth Roberts", "title": "Arundel", "year": 1930}
+
+Output:
+{"year":1930,"author_gender":"male","author_year_of_birth":1885,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Judah, Samuel B. H. (Samuel Benjamin Helbert), ca. 1799-1876", "title": "Odofriede; the Outcast", "year": 1822}
+
+Output:
+{"year":1822,"author_gender":"male","author_year_of_birth":1799,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Alcorn, Randy C. ", "title": "Safely home /", "year": 2003}
+
+Output:
+{"year":2001,"author_gender":"male","author_year_of_birth":1954,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "A.B. Guthrie Jr.", "title": "The Last Valley", "year": 1975}
+
+Output:
+{"year":1975,"author_gender":"male","author_year_of_birth":1901,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Sherley Anne Williams", "title": "Dessa Rose", "year": 1986}
+
+Output:
+{"year":1986,"author_gender":"female","author_year_of_birth":1944,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Larcom, Lucy, 1824-1893", "title": "[Poems, in] The ladies' wreath and Parlor Annual", "year": 1857}
+
+Output:
+{"year":1857,"author_gender":"female","author_year_of_birth":1824,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "False Entry", "title": "Hortense Calisher", "year": 1961}
+
+Output:
+{"year":null,"author_gender":null,"author_year_of_birth":null,"genre":null,"target_audience":null}
+
+---
+
+Input:
+{"author": "Struthers Burt", "title": "Along the Street", "year": 1942}
+
+Output:
+{"year":1942,"author_gender":"male","author_year_of_birth":1882,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Sidney Sheldon", "title": "If Tomorrow Comes", "year": 1985}
+
+Output:
+{"year":1985,"author_gender":"male","author_year_of_birth":1917,"genre":"Mystery and detective fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Robert Coover", "title": "Public Burning", "year": 1977}
+
+Output:
+{"year":1977,"author_gender":"male","author_year_of_birth":1932,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Anon., 1865-1900 (Dramas of the American Realistic Period)", "title": "The Challenge Dance", "year": 1888}
+
+Output:
+{"year":1874,"author_gender":null,"author_year_of_birth":null,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Foster, Lori, 1958-  Leto, Julie Elizabeth. ; One wicked weekend.", "title": "Impetuous /", "year": 2003}
+
+Output:
+{"year":1995,"author_gender":"female","author_year_of_birth":1958,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Earl Derr Biggers", "title": "Charlie Chan Carries On", "year": 1930}
+
+Output:
+{"year":1930,"author_gender":"male","author_year_of_birth":1844,"genre":"Mystery and detective fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Hearn, Lafcadio, 1850-1904", "title": "The Romance of the Milky Way And Other Studies &amp; Stories", "year": 1905}
+
+Output:
+{"year":1905,"author_gender":"male","author_year_of_birth":1850,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Sargent, Epes, 1813-1880", "title": "The Stranger", "year": 1848}
+
+Output:
+{"year":1790,"author_gender":"male","author_year_of_birth":1761,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Eggleston, Edward, 1837-1902.", "title": "The End of the World: A Love Story", "year": 1872}
+
+Output:
+{"year":1872,"author_gender":"male","author_year_of_birth":1837,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Pepper, George, fl. 1835", "title": "Kathleen O'Neil", "year": 1832}
+
+Output:
+{"year":1832,"author_gender":"male","author_year_of_birth":null,"genre":null,"target_audience":null}
+
+---
+
+Input:
+{"author": "Marthedith Furnas", "title": "A Serpent's Tooth", "year": 1946}
+
+Output:
+{"year":1946,"author_gender":"female","author_year_of_birth":1904,"genre":"Historical fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Coonts, Stephen, 1946- ", "title": "Liberty /", "year": 2003}
+
+Output:
+{"year":2003,"author_gender":"male","author_year_of_birth":1946,"genre":"Adventure and Western","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "John O'Hara", "title": "Rage to Live", "year": 1949}
+
+Output:
+{"year":1949,"author_gender":"male","author_year_of_birth":1905,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Gertrude Stein", "title": "Lucy Church Amiably", "year": 1930}
+
+Output:
+{"year":1930,"author_gender":"female","author_year_of_birth":1874,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Stoddard, Elizabeth, 1823-1902", "title": "The Morgesons", "year": 1862}
+
+Output:
+{"year":1862,"author_gender":"female","author_year_of_birth":1823,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Rowson, Mrs., 1762-1824", "title": "[Poems, in] A memoir of Mrs. Susanna Rowson", "year": 1870}
+
+Output:
+{"year":1870,"author_gender":"female","author_year_of_birth":1762,"genre":"not a novel","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Aciman, Andr\u00e9. ", "title": "Call me by your name /", "year": 2007}
+
+Output:
+{"year":2007,"author_gender":"male","author_year_of_birth":1951,"genre":"Romance","target_audience":"young adult"}
+
+---
+
+Input:
+{"author": "Gilman, Charlotte Perkins, 1860-1935", "title": "What Diantha Did", "year": 1909}
+
+Output:
+{"year":1909,"author_gender":"female","author_year_of_birth":1860,"genre":"General fiction","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "King, Stephen, 1947- ", "title": "Bag of bones /", "year": 1999}
+
+Output:
+{"year":1998,"author_gender":"male","author_year_of_birth":1947,"genre":"Horror","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Themla Hatch Wyss", "title": "A Stranger Here", "year": 1993}
+
+Output:
+{"year":1993,"author_gender":"female","author_year_of_birth":1934,"genre":"Romance","target_audience":"young adult"}
+
+---
+
+Input:
+{"author": "Spencer, LaVyrle. ", "title": "Then came heaven /", "year": 1999}
+
+Output:
+{"year":1997,"author_gender":"female","author_year_of_birth":1943,"genre":"Romance","target_audience":"adult"}
+
+---
+
+Input:
+{"author": "Fitzgerald, F. Scott (Francis Scott), 1896-1940", "title": "This Side of Paradise", "year": 1920}
+
+Output:
+{"year":1920,"author_gender":"male","author_year_of_birth":1896,"genre":"Romance","target_audience":"adult"}
