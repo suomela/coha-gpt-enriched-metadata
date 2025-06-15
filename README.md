@@ -1,6 +1,6 @@
 # COHA metadata enriched with LLMs
 
-This is an enriched metadata file for the fiction section of an earlier version of the _Corpus of Historical American English_ (COHA; Davies 2010–), produced by Tanja Säily, Jukka Suomela, Florent Perek, Jimena Jiménez Real and Turo Vartiainen. The LLM-generated metadata includes genre, target audience, publication year, author gender, and author year of birth. Note that this is a pilot version, and the genre metadata in particular targets novels and is only about 70% accurate. The metadata on author gender, on the other hand, is >95% accurate. For more information, see Säily et al. (2025).
+This is an enriched metadata file for the fiction section of the first version of the _Corpus of Historical American English_ (COHA; Davies 2010–), produced by Tanja Säily, Jukka Suomela, Florent Perek, Jimena Jiménez Real and Turo Vartiainen. The LLM-generated metadata includes genre, target audience, publication year, author gender, and author year of birth. Note that this is a pilot version, and the genre metadata in particular targets novels and is only about 70% accurate. The metadata on author gender, on the other hand, is >95% accurate. For more information, see Säily et al. (2025).
 
 ## Original metadata
 
