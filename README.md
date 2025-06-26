@@ -16,4 +16,4 @@ The full system prompt is shown in [details/system-prompt.txt](details/system-pr
 
 Davies, Mark. 2010–. _The Corpus of Historical American English_: 400 million words, 1810–2009. https://www.english-corpora.org/coha/
 
-Säily, Tanja, Jukka Suomela, Florent Perek, Jimena Jiménez Real & Turo Vartiainen. 2025. Using large language models to enrich corpus metadata: The case of novels in the _Corpus of Historical American English_. 46th Annual Conference of the International Computer Archive of Modern and Medieval English (ICAME 46), Vilnius, Lithuania, June 2025. https://docs.google.com/presentation/d/1_0jfmRFuflZ1h2HWfU2inZYHA6i4cO8mf5nVlFiXE0o/edit?usp=sharing
+Säily, Tanja, Jukka Suomela, Florent Perek, Jimena Jiménez Real & Turo Vartiainen. 2025. Using large language models to enrich corpus metadata: The case of novels in the _Corpus of Historical American English_. 46th Annual Conference of the International Computer Archive of Modern and Medieval English (ICAME 46), Vilnius, Lithuania, June 2025. https://tanjasaily.fi/talks/icame46_saily_et_al_2025.pdf
